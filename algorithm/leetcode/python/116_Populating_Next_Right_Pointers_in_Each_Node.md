@@ -65,7 +65,7 @@ class Solution(object):
 
 ### 优质代码
 
-####代码1
+#### 代码1
 ```python
 # recursion
 # by https://leetcode.com/OldCodingFarmer/ 
@@ -80,7 +80,7 @@ class Solution(object):
         return root
 ```
 
-####代码2
+#### 代码2
 
 ```python
 #BFS
@@ -101,7 +101,7 @@ class Solution(object):
         return root
 ```
 
-####代码3
+#### 代码3
 
 ```python
 # DFS
