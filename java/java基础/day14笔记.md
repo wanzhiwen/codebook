@@ -1,0 +1,282 @@
+今日内容介绍
+1、Eclipse常用快捷键操作
+2、Eclipse文档注释导出帮助文档
+3、Eclipse项目的jar包导出与使用jar包
+4、不同修饰符混合使用细节
+5、辨析何时定义变量为成员变量
+6、类、抽象类、接口作为方法参数
+7、类、抽象类、接口作为方法返回值
+			
+
+### 07不同修饰符使用细节
+	
+* A: 常用来修饰类、方法、变量的修饰符如下：
+	* public 权限修饰符，公共访问, 类,方法,成员变量
+	* protected 权限修饰符，受保护访问, 方法,成员变量
+	* 默认什么也不写 也是一种权限修饰符，默认访问, 类,方法,成员变量
+	* private 权限修饰符，私有访问, 方法,成员变量
+	* static 静态修饰符  方法,成员变量
+	* final 最终修饰符   类,方法,成员变量,局部变量
+	* abstract 抽象修饰符  类 ,方法
+
+* B: 不能同时使用的修饰符
+	* abstract与private不能同时使用；
+	* <font color=yellow>abstract与static不能同时使用；</font>
+	* abstract与final不能同时使用。
+
+* C: 修饰类能够使用的修饰符：
+	* 修饰类只能使用public、默认的、final、abstract关键字
+	* 使用最多的是 public关键字
+		```java
+		public class Demo {} //最常用的方式
+		class Demo2{}
+		public final class Demo3{}
+		public abstract class Demo4{}
+		```
+* D:修饰成员变量能够使用的修饰符：
+	* public : 公共的
+	* protected : 受保护的
+	* 	: 默认的
+	* private ：私有的
+	* final : 最终的
+	* static : 静态的
+	* 使用最多的是 private
+		```java
+		public int count = 100;
+		protected int count2 = 100;
+		int count3 = 100;
+		private int count4 = 100; //最常用的方式
+		public final int count5 = 100;
+		public static int count6 = 100;
+		```
+* E:修饰构造方法能够使用的修饰符：
+	* public : 公共的
+	* protected : 受保护的
+	* 	: 默认的
+	* private ：私有的
+	* 使用最多的是 public
+		```java
+		public Demo(){} //最常用的方式
+		protected Demo(){}
+		Demo(){}
+		private Demo(){}
+		```
+* F:修饰成员方法能够使用的修饰符：
+	* public : 公共的
+	* protected : 受保护的
+	* 	: 默认的
+	* private ：私有的
+	* final : 最终的
+	* static : 静态的
+	* abstract : 抽象的
+	* 使用最多的是 public
+		```java
+		public void method1(){}//最常用的方式
+		protected void method2(){}
+		void method3(){}
+		private void method4(){}
+		public final void method5(){}
+		public static void method6(){}//最常用的方式
+		public abstract void method7();//最常用的方式
+		```
+
+### 07局部变量和成员变量解析
+* A：程序编译
+	* 数学工具类
+	```java
+	public class MathTool {
+		//求两个数的和的二倍
+		public double sum2times(int number,int number2) {
+			return (number+number2)*2;
+		}
+		//求两个数的积
+		public double area(int number,int number2) {
+			return number*number2;
+		}
+	}
+	```
+
+	* 长方形类
+	```java
+	public class CFX {
+		//因为长与宽，在现实事物中属于事物的一部分，所以定义成员变量
+		private int chang;
+		private int kuan;
+		
+		public CFX(int chang, int kuan) {
+			this.chang = chang;
+			this.kuan = kuan;
+		}
+		
+		//求长与宽的周长
+		public double zhouChang() {
+			return (chang+kuan)*2;
+		}
+		//求长与宽的面积
+		public double mianJi() {
+			return chang*kuan;
+		}
+		public int getChang() {
+			return chang;
+		}
+		public void setChang(int chang) {
+			this.chang = chang;
+		}
+		public int getKuan() {
+			return kuan;
+		}
+		public void setKuan(int kuan) {
+			this.kuan = kuan;
+		}
+	}
+	```
+
+
+### 08类作为方法的参数			
+* A：类作为方法参数
+	* 在编写程序中，会经常碰到调用的方法要接收的是一个类类型的情况，那么这时，要向方法中传入该类的对象。如下代码演示：
+		```java
+		class Person{
+			public void show(){
+				System.out.println("show方法执行了");
+			}
+		}
+		//测试类
+		public class Test {
+			public static void main(String[] args) {
+				//创建Person对象
+				Person p = new Person();
+				//调用method方法
+				method(p);
+			}
+			
+		//定义一个方法method，用来接收一个Person对象，在方法中调用Person对象的show方法
+		public static void method(Person p){
+			p.show();
+		}
+		```
+
+
+### 09抽象类作为方法参数与返回值
+* A: 抽象类作为方法参数
+	* 今后开发中，抽象类作为方法参数的情况也很多见。当遇到方法参数为抽象类类型时，要传入一个实现抽象类所有抽象方法的子类对象。如下代码演示：
+		```java
+		//抽象类
+		abstract class Person{
+			public abstract void show();
+		}
+		class Student extends Person{
+			@Override
+			public void show() {
+				System.out.println("重写了show方法");
+			}
+		}
+		//测试类
+		public class Test {
+			public static void main(String[] args) {
+				//通过多态的方式，创建一个Person类型的变量，而这个对象实际是Student
+				Person p = new Student();
+				//调用method方法
+				method(p);
+			}
+
+			//定义一个方法method，用来接收一个Person类型对象，在方法中调用Person对象的show方法
+			public static void method(Person p){//抽象类作为参数
+				//通过p变量调用show方法,这时实际调用的是Student对象中的show方法
+				p.show();	
+			}
+		}
+		```
+
+
+* B:抽象类作为方法返回值
+	* 抽象类作为方法返回值的情况，也是有的，这时需要返回一个实现抽象类所有抽象方法的子类对象。如下代码演示：
+		```java
+		//抽象类
+		abstract class Person{
+			public abstract void show();
+		}
+		class Student extends Person{
+			@Override
+			public void show() {
+				System.out.println("重写了show方法");
+			}
+		}
+		//测试类
+		public class Test {
+			public static void main(String[] args) {
+				//调用method方法，获取返回的Person对象
+				Person p = method();
+				//通过p变量调用show方法,这时实际调用的是Student对象中的show方法
+				p.show();
+			}
+
+			//定义一个方法method，用来获取一个Person对象，在方法中完成Person对象的创建
+			public static Person method(){
+				Person p = new Student();
+				return p;
+			}
+		}
+		```
+
+		
+### 10接口作为方法参数与返回值
+* A: 接口作为方法参数
+	* 接口作为方法参数的情况是很常见的，经常会碰到。当遇到方法参数为接口类型时，那么该方法要传入一个接口实现类对象。如下代码演示。
+		```java
+		//接口
+		interface Smoke{
+			public abstract void smoking();
+		}
+		class Student implements Smoke{
+			@Override
+			public void smoking() {
+				System.out.println("课下吸口烟，赛过活神仙");
+			}
+		}
+		//测试类
+		public class Test {
+			public static void main(String[] args) {
+				//通过多态的方式，创建一个Smoke类型的变量，而这个对象实际是Student
+				Smoke s = new Student();
+				//调用method方法
+				method(s);
+			}
+
+			//定义一个方法method，用来接收一个Smoke类型对象，在方法中调用Smoke对象的show方法
+			public static void method(Smoke sm){//接口作为参数
+				//通过sm变量调用smoking方法，这时实际调用的是Student对象中的smoking方法
+				sm.smoking();
+			}
+		}
+		```
+
+* B:接口作为方法返回值
+	* 接口作为方法返回值的情况，在后面的学习中会碰到。当遇到方法返回值是接口类型时，那么该方法需要返回一个接口实现类对象。如下代码演示。
+		```java
+		//接口
+		interface Smoke{
+			public abstract void smoking();
+		}
+		class Student implements Smoke{
+			@Override
+			public void smoking() {
+				System.out.println("课下吸口烟，赛过活神仙");
+			}
+		}
+		//测试类
+		public class Test {
+			public static void main(String[] args) {
+				//调用method方法，获取返回的会吸烟的对象
+				Smoke s = method();
+				//通过s变量调用smoking方法,这时实际调用的是Student对象中的smoking方法
+				s.smoking();
+			}
+
+			//定义一个方法method，用来获取一个具备吸烟功能的对象，并在方法中完成吸烟者的创建
+			public static Smoke method(){
+				Smoke sm = new Student();
+				return sm;
+			}
+		}
+		```
