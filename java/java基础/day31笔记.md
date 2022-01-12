@@ -931,6 +931,3 @@
 					//调用控制层方法，传递主键id即可
 					controller.deleteZhangWu(zwid);
 					System.out.println("删除账务成功");
-			
-###37总结
-	* 把今天的知识点总结一遍。
