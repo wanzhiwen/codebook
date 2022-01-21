@@ -1,10 +1,3 @@
-今日内容介绍
-1、Properties集合
-2、序列化流与反序列化流
-3、打印流
-4、commons-IO
-
-
 ### 01Properties集合的特点
 * A: Properties集合的特点
 	* a: Properties类介绍
