@@ -498,3 +498,23 @@ A:哈希表的存储自定义对象
         * 如果不同，说明是不同元素，添加到集合。
         * 如果相同，再判断equals比较结果。返回true则相同元素；返回false则不同元素，添加到集合。
       * 所以，使用HashSet存储自定义类型，如果没有重写该类的hashCode与equals方法，则判断重复时，使用的是地址值，如果想通过内容比较元素是否相同，需要重写该元素类的hashcode与equals方法。
+
+### 18TreeSet
+* 一个能对集合元素进行排序的一个类，元素需要实现Comparable接口实现compareTo方法，实现自然排序，或者实现Comparator比较器接口。具体使用哪种排序取决于使用的构造方法。
+  * TreeSet():根据其元素的自然排序进行排序。
+  * TreeSet<Comparator comparator>():根据指定的比较器进行排序
+  * 没有带索引的方法，所以不能使用普通for进行遍历。
+* 案例：
+  ```java
+  //实现comparable接口的compareTo接口按年龄排序。
+  public int compareTo(Student s){
+    return this.age - s.age; 
+  }
+  ```
+  ```java
+  //实现comparator比较器实现treeset
+  TreeSet<Student> ts = new TreeSet<Student>(new Comparator<Student>(){
+    return 0;
+  });
+
+  ```
